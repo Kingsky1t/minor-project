@@ -28,8 +28,16 @@ def sales_vs_returns(app, sales):
      plt.title('Gross Sales vs Returns by Product Type')
      plt.xlabel('Sales')
      plt.ylabel('Product Type')
-     plt.grid()
+     plt.grid(axis='x')  
      
-     plot_filename = 'sales_vs_returns.svg'
+     # saving the plot in a folder
+     plot_filename = 'sales_vs_returns.png'
      plot_filepath = os.path.join(app.config['STATIC_FOLDER'], plot_filename)
      plt.savefig(plot_filepath)
+     
+     
+     return {   
+               'title':'Gross sales and returns for each product.',
+               'filename':plot_filename,
+               'data':''
+            }

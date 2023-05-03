@@ -1,47 +1,60 @@
 <!DOCTYPE html>
 <html lang="en">
+     <head>
+          <meta charset="UTF-8" />
+          <meta
+               name="viewport"
+               content="width=device-width, initial-scale=1.0" />
+          <title>Form with side bar</title>
+          <link rel="stylesheet" href={{
+          url_for('static',filename='/css/style.css') }}>
+          <link rel="preconnect" href="https://fonts.googleapis.com" />
+          <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+          <link
+               href="https://fonts.googleapis.com/css2?family=Roboto&display=swap"
+               rel="stylesheet" />
+     </head>
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Form with side bar</title>
-    <link rel="stylesheet" href={{ url_for('static',filename='/css/style.css') }}>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
-</head>
+     <body>
+          <main>
+               <section id="upload-section">
+                    <div>
+                         <h1>Business Analyzer</h1>
+                    </div>
+                    <div>
+                         <label for="form">Upload file in .csv format.</label>
+                         <form
+                              action="/"
+                              id="form"
+                              method="post"
+                              enctype="multipart/form-data">
+                              <label for="file">Upload Your file</label>
+                              <input type="file" name="file" id="file" />
+                              <button type="submit">Submit</button>
+                         </form>
+                    </div>
+               </section>
 
-<body>
-    <main>
-        <section id="upload-section">
-            <div>
-                <h1>Business Analyzer</h1>
-            </div>
-            <div>
-                <label for="form">Upload file in .csv format.</label>
-                <form action="/" id="form" method="post" enctype="multipart/form-data">
-                    <label for="file">Upload Your file</label>
-                    <input type="file" name="file" id="file">
-                    <button type="submit"> Submit <button/>
-                </form>
-            </div>
-        </section>
-
-        <section id="result-section">
-            <h2>Analyzer</h2>
-            <div id="result-section-container">
-                {% if result %}
-                    {% for item in result %}
-                        <div class="result-item">
-                            <h1>{{ item['title'] }}</h1>
-                            <img src={{ url_for('static',filename=item['filename']) }} alt="hello"/>
-                            <h3>{{item['data']}}</h3>
-                        </div>
-                    {% endfor %}
-                {% endif %}
-            </div>
-        </section>
-    </main>
-</body>
-
+               <section id="result-section">
+                    <h2>Analyzer</h2>
+                    <div id="result-section-container">
+                         {% if result %}
+                              {% for item in result %}
+                                   <div class="result-item">
+                                        <h1>{{ item['title'] }}</h1>
+                                        <img src={{
+                                             url_for('static',filename=item['filename']) }}
+                                             alt="hello"/>
+                                        <div>
+                                             {% for d in item['data'] %}
+                                                  <li>{{d}}</li>
+                                             {% endfor %}
+                                        </div>
+                                   </div>
+                              {% endfor %} 
+                         {% endif %}
+                    </div>
+               </section>
+          </main>
+     </body>
 </html>
